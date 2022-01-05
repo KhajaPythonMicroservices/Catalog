@@ -1,7 +1,7 @@
 from flask import Flask
 from config import Config
 from extensions import db
-from flask_migrate import  Migrate
+from flask_migrate import Migrate
 
 
 def create_app() -> Flask:
@@ -13,6 +13,7 @@ def create_app() -> Flask:
     app.config.from_object(Config)
     register_extensions(app)
     return app
+
 
 def register_extensions(app):
     """

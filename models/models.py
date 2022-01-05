@@ -1,7 +1,7 @@
 from extensions import db
 
 
-class CatalogBaseModel(db.Model):
+class CatalogBaseModel:
     """
     This class represents the base Model
     """
@@ -11,10 +11,9 @@ class CatalogBaseModel(db.Model):
     is_deleted = db.Column(db.Boolean(), default=False, server_default="False", nullable=False)
 
 
-class CatalogType(CatalogBaseModel):
+class CatalogType(CatalogBaseModel, db.Model):
     """
     This class represents type of the catalog
     """
-    __tablename__ = "catalogtype"
 
     type = db.Column(db.String, nullable=False)
