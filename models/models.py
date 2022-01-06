@@ -38,6 +38,21 @@ class CatalogBaseModel:
         """
         return cls.query.filter(cls.is_deleted.is_(False)).all()
 
+    @classmethod
+    def get_by_id(cls, id):
+        """
+        This method implements getting the elements by id
+        :param id of the entity
+        :return: element by id
+        """
+        return cls.query.filter_by(id=id, is_deleted=False).first()
+
+    @property
+    def data(self):
+        return {
+            'id': self.id
+        }
+
 
 class CatalogType(CatalogBaseModel, db.Model):
     """
@@ -45,6 +60,13 @@ class CatalogType(CatalogBaseModel, db.Model):
     """
 
     type = db.Column(db.String, nullable=False)
+
+    @property
+    def data(self):
+        return {
+            'id': self.id,
+            'type': self.type
+        }
 
 
 class CatalogBrand(CatalogBaseModel, db.Model):
@@ -80,6 +102,3 @@ class CatalogItem(CatalogBaseModel, db.Model):
     available_stock = db.Column(db.Integer, default=0)
     max_stock = db.Column(db.Integer, default=0)
     restock_threshold = db.Column(db.Integer, default=0)
-
-
-

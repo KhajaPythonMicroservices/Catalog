@@ -4,7 +4,8 @@ from extensions import db
 from flask_migrate import Migrate
 from flask_restful import Api
 
-from resources.catalogbrand import CatalogBrandListResource
+from resources.catalogbrand import CatalogBrandListResource, CatalogBrandResource
+from resources.catalogtype import CatalogTypeListResource, CatalogTypeResource
 
 
 def create_app() -> Flask:
@@ -28,6 +29,7 @@ def register_extensions(app):
     db.init_app(app)
     migrate = Migrate(app, db)
 
+
 def register_resources(app):
     """
     This method is used to register the app resources
@@ -36,6 +38,9 @@ def register_resources(app):
     """
     api = Api(app)
     api.add_resource(CatalogBrandListResource, '/api/v1/catalog/brands')
+    api.add_resource(CatalogTypeListResource, '/api/v1/catalog/types')
+    api.add_resource(CatalogBrandResource, '/api/v1/catalog/brands/<int:id>')
+    api.add_resource(CatalogTypeResource, '/api/v1/catalog/types/<int:id>')
 
 
 if __name__ == '__main__':
