@@ -36,7 +36,7 @@ class CatalogBaseModel:
         """
         This method will get all the items
         """
-        return cls.query.filter(cls.is_deleted.is_(False))
+        return cls.query.filter(cls.is_deleted.is_(False)).all()
 
 
 class CatalogType(CatalogBaseModel, db.Model):
@@ -53,6 +53,13 @@ class CatalogBrand(CatalogBaseModel, db.Model):
     """
     brand = db.Column(db.String, nullable=False)
     items = db.relationship('CatalogItem', backref='catalog_brand', lazy=True)
+
+    @property
+    def data(self):
+        return {
+            'id': self.id,
+            'brand': self.brand
+        }
 
 
 class CatalogItem(CatalogBaseModel, db.Model):
