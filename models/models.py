@@ -102,3 +102,13 @@ class CatalogItem(CatalogBaseModel, db.Model):
     available_stock = db.Column(db.Integer, default=0)
     max_stock = db.Column(db.Integer, default=0)
     restock_threshold = db.Column(db.Integer, default=0)
+
+    @property
+    def data(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'available_stock': self.available_stock
+
+        }
