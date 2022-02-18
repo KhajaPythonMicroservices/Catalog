@@ -3,6 +3,7 @@ from config import Config
 from extensions import db
 from flask_migrate import Migrate
 from flask_restful import Api
+import constants
 
 from resources.catalogbrand import (
     CatalogBrandListResource,
@@ -19,13 +20,15 @@ from resources.catalogitem import (
 )
 
 
-def create_app() -> Flask:
+def create_app(db_path: constants.REFERENCE_TEST_DATABASE_PATH) -> Flask:
     """
     Create the flask application Object
     :return: Flask Application Object
     """
     app = Flask(__name__)
     app.config.from_object(Config)
+    if not Config.is_prod_environment:
+        app.config['SQLALCHEMY_DATABASE_URI'] = fr"sqlite:///{db_path}"
     register_extensions(app)
     register_resources(app)
     return app

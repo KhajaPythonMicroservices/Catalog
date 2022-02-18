@@ -1,4 +1,3 @@
-
 def test_create_catalog_type(client):
     """
     This test case will test the simple post method to create a catalog type

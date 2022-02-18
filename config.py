@@ -17,7 +17,7 @@ class Config:
     else:
         import tempfile
         DEBUG = True
-        SQLALCHEMY_DATABASE_URI = f'sqlite:///catalogtest.db'
+        # SQLALCHEMY_DATABASE_URI = f'sqlite:///catalogtest.db'
     APP_PORT = os.getenv('APP_PORT', "9001")
     APP_HOST = os.getenv('APP_HOST', "0.0.0.0")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
