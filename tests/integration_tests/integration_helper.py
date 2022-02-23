@@ -28,6 +28,7 @@ def basic_test(client,
     # Get the specific item
     response = client.get(f"{individual_link}/{item_id}")
     assert response.status_code == 200
+    client.put(f"{individual_link}/{item_id}", json=data)
     # Delete the specific item
     client.delete(f"{individual_link}/{item_id}")
     response = client.get(retrieve_link)
